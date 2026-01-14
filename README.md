@@ -1,3 +1,3 @@
-# horse-betting-project
+# horse-stable-management-project
 
-we love horse racing and gambling
+we love horses
