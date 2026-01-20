@@ -152,4 +152,10 @@ public class horse {
         }
         this.weight = weight;
     }
+
+    // man what even are horses
+    // they're goated enough to be made into a popular gacha game
+    // i love horses
+    // we rode these creatures into war in the past, how are they so goofy now
+    
 }
