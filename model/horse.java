@@ -128,7 +128,7 @@ public class horse {
     }
     
     public void setDam(String dam) {
-        this.dam = dam != null h? dam.trim() : null;
+        this.dam = dam != null ? dam.trim() : null;
     }
 
     public double getHeight() {
