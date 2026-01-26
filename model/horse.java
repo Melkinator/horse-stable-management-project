@@ -24,7 +24,7 @@ public class horse {
         public String toString() {
             return this.name().charAt(0) + this.name().substring(1).toLowerCase();
         }
-    }
+    } // you use this enum by writing uma.SetGender(Gender.placeholder) (placeholder is any of the Genders listed here) cuh
 
     // the constructors
 
