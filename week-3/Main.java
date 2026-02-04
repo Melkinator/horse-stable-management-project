@@ -105,13 +105,27 @@ class Main {
             System.out.println("Horse not found.");
         }
 
-        Buyer buyer = new Buyer("John", h1, 10000);
-        h1.weight = 600;
-
-        buyer.printBuyerInfo();
-        System.out.println("Current horse weight: " + h1.weight);
-
         Staff staff = new Staff("Melk", 101, h1, stable);
         staff.printStaff();
+
+        // f1
+        int original = 5;
+        int copy = original;
+        copy = 10;
+        System.out.println("f1: original = " + original + ", copy = " + copy);
+
+        // f2
+        Horse refHorse = h1;
+        refHorse.weight = 550;
+        System.out.println("f2: h1.weight = " + h1.weight);
+
+        // f3
+        h2.name = "Neo Universe";
+        System.out.println("f3: horse in the array = " + stable.horses[1].name);
+
+        // f4
+        Buyer buyer = new Buyer("John", h1, 10000);
+        h1.weight = 600;
+        buyer.printBuyerInfo();
     }
 }
