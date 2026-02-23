@@ -10,15 +10,36 @@ public class Staff {
     public Staff(String name, String role) {
         staffCounter++;
         this.id = staffCounter;
-        this.name = name;
-        this.role = role;
+        setName(name);
+        setRole(role);
     }
 
-    public int getStaffCounter() {
-        return staffCounter;
+    // getters
+    public int getStaffCounter() { return staffCounter; }
+    public String getName() { return name; }
+    public String getRole() { return role; }
+    public int getId() { return id; }
+
+    // setters
+    public void setName(String name) {
+        if (name==null||name.trim().isEmpty()) {
+            this.name = "No Name";
+        } else {
+            this.name = name.trim();
+        }
     }
 
-    public String getName() {
-        return name;
+    public void setRole(String role) {
+        if (role==null||role.trim().isEmpty()) {
+            this.role = "No Role";
+        } else {
+            this.role = role.trim();
+        }
     }
+
+    @Override
+    public String toString() {
+        return "Staff [id=" + id + ", name=" + name + ", role=" + role + "]";
+    }
+
 }

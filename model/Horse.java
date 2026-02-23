@@ -6,9 +6,10 @@ public class Horse {
     private String breed;
     private String color;
     private Gender gender;
-    private int stallId;
     private double weight;
     private double height;
+
+    private static int horseCounter = 0;
 
     public enum Gender {
         STALLION, MARE, GELDING, FILLY, COLT;
@@ -20,15 +21,16 @@ public class Horse {
     } // you use this enum by writing uma.SetGender(Gender.placeholder) (placeholder is any of the Genders listed here) cuh
 
     // the constructors
-    
-    public Horse(String name, String breed, String color, Gender gender, int stallId, double weight, double height) {
+
+    public Horse(String name, String breed, String color, Gender gender, double weight, double height) {
+        horseCounter++;
+        this.id = horseCounter;
         setName(name);
         setBreed(breed);
         setColor(color);
         setGender(gender);
-        this.stallId = stallId;
-        this.weight = weight;
-        this.height = height;
+        setWeight(weight);
+        setHeight(height);
     }
 
     // getters
@@ -37,7 +39,6 @@ public class Horse {
     public String getBreed() { return breed; }
     public String getColor() { return color; }
     public Gender getGender() { return gender; }
-    public int getStallId() { return stallId; }
     public double getWeight() { return weight; }
     public double getHeight() { return height; }
 
@@ -74,25 +75,26 @@ public class Horse {
         this.gender = gender;
     }
 
-    public void setStallId(int stallId) {
-        if (stallId < 0) {
-            throw new IllegalArgumentException("stall id cant be lower than 0 twin");
-        }
-        this.stallId = stallId;
-    }
-
     public void setHeight(double height) {
-        if (height < 0) {
-            throw new IllegalArgumentException("how does a horse have a negative height vro :broken_heart:");
+        if (height<0) {
+            this.height = 0;
+        } else {
+            this.height = height;
         }
-        this.height = height;
     }
 
     public void setWeight(double weight) {
-        if (weight < 0) {
-            throw new IllegalArgumentException("damn he be floatin yo");
+        if (weight<0) {
+            this.weight = 0;
+        } else {
+            this.weight = weight;
         }
-        this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return "Horse [id=" + id + ", name=" + name + ", breed=" + breed + ", color=" + color + ", gender=" + gender
+                + ", weight=" + weight + ", height=" + height + "]";
     }
 
     // man what even are horses

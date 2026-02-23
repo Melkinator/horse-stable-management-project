@@ -6,32 +6,43 @@ public class Customer {
 
     private String customerName;
     private Horse horse;
-    private double snapshotWeight;
+    private double weight;
     private boolean isBuying;
 
     public Customer(String customerName, Horse horse, boolean isBuying) {
-        this.customerName = customerName;
+        setCustomerName(customerName);
         this.horse = horse;
         this.isBuying = false;
-        this.snapshotWeight = horse.getWeight();
-        
+        this.weight = (horse==null) ? 0 : horse.getWeight();
+
         customerCount++;
     }
 
-    public static int getCustomerCount() {
-        return customerCount;
+    //getters
+
+    public String getCustomerName() { return customerName; }
+    public double getWeight() { return weight; }
+    public Horse getHorse() { return horse; }
+    public boolean isBuying() { return isBuying; }
+    public static int getCustomerCount() { return customerCount; }
+
+    //setters
+
+    public void setCustomerName(String customerName) {
+        if (customerName==null||customerName.trim().isEmpty()) {
+            this.customerName = "No Name";
+        } else {
+            this.customerName = customerName.trim();
+        }
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
-    public Horse getHorse() {
-        return horse;
-    }
-
-    public boolean isBuying() {
-        return isBuying;
+    public void setHorse(Horse horse) {
+        this.horse = horse;
+        this.weight = (horse==null) ? 0 : horse.getWeight();
     }
 
     public void setBuying(boolean buying) {
@@ -40,8 +51,8 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer [customerName=" + customerName + ", horse=" + horse + ", snapshotWeight=" + snapshotWeight
-                + ", isBuying=" + isBuying + "]";
+        return "Customer [customerName=" + customerName + ", horse=" + horse + ", weight=" + weight + ", isBuying="
+                + isBuying + "]";
     }
 
     
