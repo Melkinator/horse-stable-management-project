@@ -1,18 +1,12 @@
 package model;
 
-import java.time.LocalDate;
-
 public class Horse {
     private int id;
     private String name;
     private String breed;
     private String color;
     private Gender gender;
-    private LocalDate birthDate;
-    private LocalDate arrivalDate;
     private int stallId;
-    private String sire; // the father
-    private String dam; // the mother
     private double weight;
     private double height;
 
@@ -27,88 +21,57 @@ public class Horse {
 
     // the constructors
     
-    public Horse(String name, String breed, String color, Gender gender, LocalDate birthDate, LocalDate arrivalDate, int stallId, String sire, String dam, double weight, double height) {
-        this.name = name;
-        this.breed = breed;
-        this.color = color;
-        this.gender = gender;
-        this.birthDate = birthDate;
-        this.arrivalDate = arrivalDate;
+    public Horse(String name, String breed, String color, Gender gender, int stallId, double weight, double height) {
+        setName(name);
+        setBreed(breed);
+        setColor(color);
+        setGender(gender);
         this.stallId = stallId;
-        this.sire = sire;
-        this.dam = dam;
         this.weight = weight;
         this.height = height;
     }
 
-    public int getId() {
-        return id;
-    }
+    // getters
+    public int getId() { return id; }
+    public String getName() { return name; }
+    public String getBreed() { return breed; }
+    public String getColor() { return color; }
+    public Gender getGender() { return gender; }
+    public int getStallId() { return stallId; }
+    public double getWeight() { return weight; }
+    public double getHeight() { return height; }
 
+    // setters
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         if (name==null||name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Horse name can't be empty dumbass");
+            this.name = "No Name";
+        } else {
+            this.name = name.trim();
         }
-        this.name = name.trim();
-    }
-
-    public String getBreed() {
-        return breed;
     }
 
     public void setBreed(String breed) {
-        this.breed = breed != null ? breed.trim() : null;
-    } // checks if the breed string is null first then if its not null then set it, else it sets it to null instead
-
-    public String getColor() {
-        return color;
+        if (breed==null||breed.trim().isEmpty()) {
+            this.breed = "Unknown";
+        } else {
+            this.breed = breed.trim();
+        }
     }
 
     public void setColor(String color) {
-        this.color = color != null ? color.trim() : null;
-    }
-
-    public Gender getGender() {
-        return gender;
+        if (color==null||color.trim().isEmpty()) {
+            this.color = "Unknown";
+        } else {
+            this.color = color.trim();
+        }
     }
 
     public void setGender(Gender gender) {
         this.gender = gender;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        if (birthDate!=null&&birthDate.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("How the hell you gonna put in a future birth date");
-        }
-        this.birthDate = birthDate;
-    }
-
-
-    public LocalDate getArrivalDate() {
-        return arrivalDate;
-    }
-
-    public void setArrivalDate(LocalDate arrivalDate) {
-        if (arrivalDate!=null&&arrivalDate.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("How the hell you gonna put in a future arrival date");
-        }
-        this.arrivalDate = arrivalDate;
-    }
-
-    public int getStallId() {
-        return stallId;
     }
 
     public void setStallId(int stallId) {
@@ -118,26 +81,6 @@ public class Horse {
         this.stallId = stallId;
     }
 
-    public String getSire() {
-        return sire;
-    }
-    
-    public void setSire(String sire) {
-        this.sire = sire != null ? sire.trim() : null;
-    }
-    
-    public String getDam() {
-        return dam;
-    }
-    
-    public void setDam(String dam) {
-        this.dam = dam != null ? dam.trim() : null;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
     public void setHeight(double height) {
         if (height < 0) {
             throw new IllegalArgumentException("how does a horse have a negative height vro :broken_heart:");
@@ -145,22 +88,11 @@ public class Horse {
         this.height = height;
     }
 
-    public double getWeight() {
-        return weight;
-    }
-
     public void setWeight(double weight) {
         if (weight < 0) {
             throw new IllegalArgumentException("damn he be floatin yo");
         }
         this.weight = weight;
-    }
-
-    @Override
-    public String toString() {
-        return "Horse [id=" + id + ", name=" + name + ", breed=" + breed + ", color=" + color + ", gender=" + gender
-                + ", birthDate=" + birthDate + ", arrivalDate=" + arrivalDate + ", stallId=" + stallId + ", sire="
-                + sire + ", dam=" + dam + ", weight=" + weight + ", height=" + height + "]";
     }
 
     // man what even are horses
