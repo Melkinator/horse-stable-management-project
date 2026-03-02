@@ -1,40 +1,36 @@
 package model;
 
-public class Staff implements IUser{
+public class Manager implements IUser {
     private String id;
     private String name;
-    private String role;
-
     private String username;
     private String password;
-
+    private String role;
     private boolean active;
 
-    // perms
-    public boolean can(String action) {
-        if (action.equals("VIEW_STABLE")) {
-            return true;
-        }
-        return false;
-    }
-
-    public Staff(String id, String name, String role, String username, String password) {
+    public Manager(String id, String name, String username, String password, String role) {
         setId(id);
         setName(name);
-        setRole(role);
         setUsername(username);
         setPassword(password);
+        setRole(role);
 
         this.active = true;
     }
 
-    // getters
     public String getId() { return id; }
     public String getName() { return name; }
-    public String getRole() { return role; }
-    public boolean isActive() { return active; }
     public String getUsername() { return username; }
     public String getPassword() { return password; }
+    public String getRole() { return role; }
+    public boolean isActive() { return active; }
+
+    @Override public boolean can(String action) {
+        if (action.equals("CREATE_STAFF") || action.equals("CREATE_HORSE") || action.equals("CREATE_STABLE") || action.equals("VIEW_STABLE")) {
+            return true;
+        }
+        return false;
+    }
 
     // setters
     public void setId(String id) {
@@ -55,7 +51,7 @@ public class Staff implements IUser{
 
     public void setUsername(String username) {
         if (isBlank(username)) {
-            this.username = "admin";
+            this.username="unknown";
         } else {
             this.username = username.trim();
         }
@@ -69,25 +65,20 @@ public class Staff implements IUser{
 
     public void setRole(String role) {
         if (isBlank(role)) {
-            this.role = "ADMIN";
+            this.role="MANAGER";
         } else {
             this.role = role.trim();
         }
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
     // helpers
 
-    private boolean isBlank(String str) {
+    public static boolean isBlank(String str) {
         return str == null || str.trim().isEmpty();
     }
 
     @Override
     public String toString() {
-        return "Staff [id=" + id + ", name=" + name + ", role=" + role + "]";
+        return "Manager [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + "]";
     }
-
 }

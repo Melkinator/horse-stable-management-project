@@ -1,55 +1,41 @@
 package model;
 
-public class Staff implements IUser{
+public class Admin implements IUser {
     private String id;
     private String name;
-    private String role;
-
     private String username;
     private String password;
-
+    private String role;
     private boolean active;
 
-    // perms
-    public boolean can(String action) {
-        if (action.equals("VIEW_STABLE")) {
-            return true;
-        }
-        return false;
-    }
-
-    public Staff(String id, String name, String role, String username, String password) {
+    public Admin(String id, String name, String username, String password, String role) {
         setId(id);
         setName(name);
-        setRole(role);
         setUsername(username);
         setPassword(password);
+        setRole(role);
 
         this.active = true;
     }
 
-    // getters
     public String getId() { return id; }
     public String getName() { return name; }
-    public String getRole() { return role; }
-    public boolean isActive() { return active; }
     public String getUsername() { return username; }
     public String getPassword() { return password; }
+    public String getRole() { return role; }
+    public boolean isActive() { return active; }
+
+    @Override public boolean can(String action) {
+        // Admin can do everything
+        return true;
+    }
 
     // setters
     public void setId(String id) {
         if (isBlank(id)) {
-            this.id="unknown";
+            this.id="admin";
         } else {
             this.id = id.trim();
-        }
-    }
-
-    public void setName(String name) {
-        if (isBlank(name)) {
-            this.name="unknown";
-        } else {
-            this.name = name.trim();
         }
     }
 
@@ -58,6 +44,14 @@ public class Staff implements IUser{
             this.username = "admin";
         } else {
             this.username = username.trim();
+        }
+    }
+
+    public void setName(String name) {
+        if (isBlank(name)) {
+            this.name = "Admin";
+        } else {
+            this.name = name.trim();
         }
     }
 
@@ -87,7 +81,6 @@ public class Staff implements IUser{
 
     @Override
     public String toString() {
-        return "Staff [id=" + id + ", name=" + name + ", role=" + role + "]";
+        return "Admin [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + "]";
     }
-
 }
