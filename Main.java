@@ -1,7 +1,9 @@
-package Pain;
-
 import java.time.LocalDate;
 import java.util.Scanner;
+
+import Pain.Horse;
+import Pain.IUser;
+import Pain.Stable;
 
 public class Main {
 
