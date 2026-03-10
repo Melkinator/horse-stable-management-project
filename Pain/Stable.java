@@ -50,8 +50,7 @@ public class Stable {
 
     // ===== Seed default admin =====
     private void seedDefaultAdmin() {
-        Staff defaultStaff = new Staff("A001", "Admin", "admin", "1234", "ADMIN");
-        staffs.add(new Admin(defaultStaff));
+        staffs.add(new Admin("A001", "Admin", "admin", "1234", "ADMIN"));
     }
 
     // ===== Login check =====
@@ -110,12 +109,10 @@ public class Stable {
             }
         }
         if (role.equalsIgnoreCase("ADMIN")) {
-            Staff adminStaff = new Staff(id, name, username, password, "ADMIN");
-            staffs.add(new Admin(adminStaff));
+            staffs.add(new Admin(id, name, username, password, "ADMIN"));
             setLastMessage("Admin created successfully.");
         } else if (role.equalsIgnoreCase("MANAGER")) {
-            Staff managerStaff = new Staff(id, name, username, password, "MANAGER");
-            staffs.add(new Manager(managerStaff));
+            staffs.add(new Manager(id, name, username, password, "MANAGER"));
             setLastMessage("Manager created successfully.");
         } else if (role.equalsIgnoreCase("STAFF")) {
             staffs.add(new Staff(id, name, username, password, "STAFF"));
