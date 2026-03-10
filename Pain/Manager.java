@@ -2,8 +2,8 @@ package Pain;
 
 public class Manager extends Staff {
 
-    public Manager(String id, String name, String username, String password, String role) {
-        super(id, name, username, password, role);
+    public Manager(Staff s) {
+        super(s.getId(), s.getName(), s.getUsername(), s.getPassword(), s.getRole());
     }
 
     @Override
