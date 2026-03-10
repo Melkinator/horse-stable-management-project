@@ -1,6 +1,7 @@
 package Pain;
 
-public class Staff implements IUser {
+public abstract class Staff implements IUser {
+
     private String id;
     private String name;
     private String username;
@@ -8,7 +9,6 @@ public class Staff implements IUser {
     private String role;
     private boolean active;
 
-    // ===== Constructor =====
     public Staff(String id, String name, String username, String password, String role) {
         setId(id);
         setName(name);
@@ -17,12 +17,10 @@ public class Staff implements IUser {
         setRole(role);
         this.active = true;
     }
-    @Override
-    public boolean can(String action) {
-        return false;
-    }
 
-    // ===== Getters =====
+    @Override
+    public abstract boolean can(String action);
+
     public String getId()       { return id; }
     public String getName()     { return name; }
     public String getUsername() { return username; }
@@ -30,31 +28,33 @@ public class Staff implements IUser {
     public String getRole()     { return role; }
     public boolean isActive()   { return active; }
 
-    // ===== Setters with validation =====
     public void setId(String id) {
-        if (isBlank(id)) this.id = "unknown";
-        else this.id = id.trim();
+        if (isBlank(id)) this.id = "unknown"; else this.id = id.trim();
     }
     public void setName(String name) {
-        if (isBlank(name)) this.name = "unknown";
-        else this.name = name.trim();
+        if (isBlank(name)) this.name = "unknown"; else this.name = name.trim();
     }
     public void setUsername(String username) {
-        if (isBlank(username)) this.username = "unknown";
-        else this.username = username.trim();
+        if (isBlank(username)) this.username = "unknown"; else this.username = username.trim();
     }
     public void setPassword(String password) {
         String pw = isBlank(password) ? "password" : password.trim();
-        if (pw.length() < 4) this.password = "password";
-        else this.password = pw;
+        if (pw.length() < 4) this.password = "password"; else this.password = pw;
     }
     public void setRole(String role) {
-        if (isBlank(role)) this.role = "STAFF";
-        else this.role = role.trim();
+        if (isBlank(role)) this.role = "STAFF"; else this.role = role.trim();
     }
     public void setActive(boolean active) { this.active = active; }
 
-    // ===== Helper =====
+    // equals: two Staff are equal if same id
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Staff)) return false;
+        Staff other = (Staff) obj;
+        return this.id != null && this.id.equals(other.id);
+    }
+
     protected boolean isBlank(String str) {
         return str == null || str.trim().isEmpty();
     }
