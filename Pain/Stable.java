@@ -171,13 +171,13 @@ public class Stable {
     }
 
     public void printActiveStaffLambda() {
-        System.out.println("\n[Lambda] Active staff:");
+        System.out.println("\n Active staff:");
         filterStaff(s -> s.isActive());
     }
 
 
     public void printStaffByRole(String role) {
-        System.out.println("\n[Lambda] Staff with role '" + role + "':");
+        System.out.println("\n Staff with role '" + role + "':");
         filterStaff(s -> s.getRole().equalsIgnoreCase(role));
     }
 
