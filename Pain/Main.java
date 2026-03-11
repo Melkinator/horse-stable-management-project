@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Stable stable = new Stable("CADT Horse Stable");
+        Stable stable = new Stable("John and Melk's Stable");
         System.out.println(stable.getLastMessage());
 
         int choice;
