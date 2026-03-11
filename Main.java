@@ -87,13 +87,14 @@ public class Main {
                     case 6:  { stable.printStaff();     break; }
                     case 7:  { stable.printHorses();    break; }
                     case 8:  { stable.printCustomers(); break; }
-                    case 9:  { stable.printActiveStaff();       break; }
-                    case 10:  { stable.printActiveStaffLambda(); break; }
-                    case 11: {
+                    case 9:  { stable.printBookings();  break; }
+                    case 10:  { stable.printActiveStaff();       break; }
+                    case 11:  { stable.printActiveStaffLambda(); break; }
+                    case 12: {
                         System.out.print("Role to filter (ADMIN/MANAGER): ");
                         stable.printStaffByRole(sc.nextLine()); break;
                     }
-                    case 12: { stable.logout(); System.out.println(stable.getLastMessage()); break; }
+                    case 13: { stable.logout(); System.out.println(stable.getLastMessage()); break; }
                     case 0:  { System.out.println("Goodbye!"); break; }
                     default: System.out.println("Invalid choice.");
                 }
@@ -120,10 +121,11 @@ public class Main {
         System.out.println("6)  List Staff");
         System.out.println("7)  List Horses");
         System.out.println("8)  List Customers");
-        System.out.println("9)  List Active Staff [stream]");
-        System.out.println("10) List Active Staff [lambda]");
-        System.out.println("11) Filter Staff by Role [lambda]");
-        System.out.println("12) Logout");
+        System.out.println("9)  List Service Bookings");
+        System.out.println("10) List Active Staff [stream]");
+        System.out.println("11) List Active Staff [lambda]");
+        System.out.println("12) Filter Staff by Role [lambda]");
+        System.out.println("13) Logout");
         System.out.println("0)  Exit");
     }
 }

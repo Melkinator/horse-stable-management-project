@@ -149,12 +149,18 @@ public class Stable {
         if (!loggedInUser.can(BOOK_SERVICE)) { setLastMessage("Permission denied: cannot book services."); return; }
         Customer customer = findCustomerById(customerId);
         if (customer == null) { setLastMessage("Customer not found with ID: " + customerId); return; }
-        
+
         Horse horse = findHorseById(horseId);
         if (horse == null) { setLastMessage("Horse not found with ID: " + horseId); return; }
         ServiceBooking booking = new ServiceBooking(bookingId, customer, horse, durationDays, loggedInUser);
         bookings.add(booking);
         setLastMessage("Service booked successfully for customer '" + customer.getCustomerName() + "' and horse '" + horse.getName() + "'. Total fee: $" + booking.getTotalFee());
+    }
+
+    public void printBookings() {
+        System.out.println("\n--- Service Bookings (" + bookings.size() + ") ---");
+        if (bookings.isEmpty()) { System.out.println("No bookings."); return; }
+        for (int i = 0; i < bookings.size(); i++) System.out.println((i+1) + ") " + bookings.get(i));
     }
 
     private Customer findCustomerById(String customerId) {
