@@ -1,7 +1,9 @@
-package Pain;
-
 import java.time.LocalDate;
 import java.util.Scanner;
+
+import Pain.Horse;
+import Pain.Stable;
+import Pain.IUser;
 
 public class Main {
 
@@ -68,21 +70,30 @@ public class Main {
                         System.out.println(stable.getLastMessage()); break;
                     }
                     case 4: {
+                        System.out.print("Booking ID: "); String bId = sc.nextLine();
+                        System.out.print("Customer ID: "); String cId = sc.nextLine();
+                        System.out.print("Horse ID: "); int hId = sc.nextInt();
+                        System.out.print("Duration (Days): "); int days = sc.nextInt();
+                        stable.addBooking(bId, cId, hId, days);
+                        System.out.println(stable.getLastMessage());
+                        break;
+                    }
+                    case 5: {
                         System.out.print("Horse ID: "); int hId = sc.nextInt(); sc.nextLine();
                         System.out.print("Available? (1=Yes, 0=No): "); int a = sc.nextInt(); sc.nextLine();
                         stable.setHorseAvailability(hId, a == 1);
                         System.out.println(stable.getLastMessage()); break;
                     }
-                    case 5:  { stable.printStaff();     break; }
-                    case 6:  { stable.printHorses();    break; }
-                    case 7:  { stable.printCustomers(); break; }
-                    case 8:  { stable.printActiveStaff();       break; }
-                    case 9:  { stable.printActiveStaffLambda(); break; }
-                    case 10: {
+                    case 6:  { stable.printStaff();     break; }
+                    case 7:  { stable.printHorses();    break; }
+                    case 8:  { stable.printCustomers(); break; }
+                    case 9:  { stable.printActiveStaff();       break; }
+                    case 10:  { stable.printActiveStaffLambda(); break; }
+                    case 11: {
                         System.out.print("Role to filter (ADMIN/MANAGER): ");
                         stable.printStaffByRole(sc.nextLine()); break;
                     }
-                    case 11: { stable.logout(); System.out.println(stable.getLastMessage()); break; }
+                    case 12: { stable.logout(); System.out.println(stable.getLastMessage()); break; }
                     case 0:  { System.out.println("Goodbye!"); break; }
                     default: System.out.println("Invalid choice.");
                 }
@@ -104,14 +115,15 @@ public class Main {
         System.out.println("1)  Create Staff");
         System.out.println("2)  Add Horse");
         System.out.println("3)  Register Customer");
-        System.out.println("4)  Set Horse Availability");
-        System.out.println("5)  List Staff");
-        System.out.println("6)  List Horses");
-        System.out.println("7)  List Customers");
-        System.out.println("8)  Active Staff  [anonymous inner class]");
-        System.out.println("9)  Active Staff  [lambda]");
-        System.out.println("10) Filter Staff by Role [lambda]");
-        System.out.println("11) Logout");
+        System.out.println("4)  Book Service");
+        System.out.println("5)  Set Horse Availability");
+        System.out.println("6)  List Staff");
+        System.out.println("7)  List Horses");
+        System.out.println("8)  List Customers");
+        System.out.println("9)  List Active Staff [stream]");
+        System.out.println("10) List Active Staff [lambda]");
+        System.out.println("11) Filter Staff by Role [lambda]");
+        System.out.println("12) Logout");
         System.out.println("0)  Exit");
     }
 }

@@ -9,11 +9,14 @@ public class Stable {
     public static final String CREATE_HORSE    = "CREATE_HORSE";
     public static final String CREATE_CUSTOMER = "CREATE_CUSTOMER";
     public static final String VIEW_STABLES    = "VIEW_STABLE";
+    public static final String BOOK_SERVICE     = "BOOK_SERVICE";
+    public static final String VIEW_BOOKINGS    = "VIEW_BOOKINGS";
 
     private String name;
     private ArrayList<IUser> staffs;
     private ArrayList<Horse> horses;
     private ArrayList<Customer> customers;
+    private ArrayList<ServiceBooking> bookings;
     private IUser loggedInUser;
     private String lastMessage;
 
@@ -22,6 +25,7 @@ public class Stable {
         this.staffs = new ArrayList<>();
         this.horses = new ArrayList<>();
         this.customers = new ArrayList<>();
+        this.bookings = new ArrayList<>();
         this.loggedInUser = null;
         seedDefaultAdmin();
         lastMessage = "Stable system started. Default login: admin / 1234";
@@ -138,6 +142,28 @@ public class Stable {
         Horse horse = findHorseById(horseId);
         customers.add(new Customer(customerId, customerName, phone, password, balance, horse, loggedInUser));
         setLastMessage("Customer '" + customerName + "' registered successfully.");
+    }
+
+    public void addBooking(String bookingId, String customerId, int horseId, int durationDays) {
+        if (!requireStaffLogin()) return;
+        if (!loggedInUser.can(BOOK_SERVICE)) { setLastMessage("Permission denied: cannot book services."); return; }
+        Customer customer = findCustomerById(customerId);
+        if (customer == null) { setLastMessage("Customer not found with ID: " + customerId); return; }
+        
+        Horse horse = findHorseById(horseId);
+        if (horse == null) { setLastMessage("Horse not found with ID: " + horseId); return; }
+        ServiceBooking booking = new ServiceBooking(bookingId, customer, horse, durationDays, loggedInUser);
+        bookings.add(booking);
+        setLastMessage("Service booked successfully for customer '" + customer.getCustomerName() + "' and horse '" + horse.getName() + "'. Total fee: $" + booking.getTotalFee());
+    }
+
+    private Customer findCustomerById(String customerId) {
+        for (int i = 0; i < customers.size(); i++) {
+            if (customers.get(i).getCustomerId().equalsIgnoreCase(customerId.trim())) {
+                return customers.get(i);
+            }
+        }
+        return null;
     }
 
     public void filterStaff(StaffFilter filter) {
