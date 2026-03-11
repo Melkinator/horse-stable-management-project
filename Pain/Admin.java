@@ -4,8 +4,9 @@ public class Admin extends Staff {
 
     private float salary;
 
-    public Admin(Staff s, float salary) {
-        super(s.getId(), s.getName(), s.getUsername(), s.getPassword(), "ADMIN");
+    public Admin(String id, String name, String phone,
+                 String username, String password, float salary) {
+        super(id, name, phone, username, password, "ADMIN");
         setSalary(salary);
     }
 

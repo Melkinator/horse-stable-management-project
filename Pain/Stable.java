@@ -33,17 +33,13 @@ public class Stable {
     public String getLastMessage() { return lastMessage; }
 
     public void setName(String name) {
-        if (isBlank(name)) this.name = "No Name"; else this.name = name.trim();
+        if (name == null || name.trim().isEmpty()) this.name = "No Name";
+        else this.name = name.trim();
     }
     private void setLastMessage(String msg) { lastMessage = msg; }
 
-
     private void seedDefaultAdmin() {
-        Staff seed = new Staff("A001", "Admin", "admin", "1234", "ADMIN") {
-            @Override
-            public boolean can(String action) { return true; }
-        };
-        staffs.add(new Admin(seed, 2000));
+        staffs.add(new Admin("A001", "Admin", "00000001", "admin", "1234", 2000));
     }
 
     public boolean requireStaffLogin() {
@@ -57,14 +53,14 @@ public class Stable {
     }
 
     public void login(String username, String password) {
-        if (isBlank(username) || password == null) {
+        if (username == null || username.trim().isEmpty() || password == null) {
             setLastMessage("Login failed: missing username or password."); return;
         }
         for (int i = 0; i < staffs.size(); i++) {
             IUser user = staffs.get(i);
             if (user.getUsername().equalsIgnoreCase(username.trim())) {
                 if (!user.isActive()) { setLastMessage("Login failed: account is inactive."); return; }
-                if (!user.getPassword().equals(password)) { setLastMessage("Login failed: wrong password."); return; }
+                if (!user.checkPassword(password)) { setLastMessage("Login failed: wrong password."); return; }
                 loggedInUser = user;
                 setLastMessage("Login successful. Welcome, " + user.getName() + "!");
                 return;
@@ -78,24 +74,23 @@ public class Stable {
         setLastMessage("Logged out successfully.");
     }
 
-    public void createStaff(String id, String name, String role, String username, String password, float salary) {
+    public void createStaff(String id, String name, String phone, String role,
+                            String username, String password, float salary) {
         if (!requireStaffLogin()) return;
         if (!loggedInUser.can(CREATE_STAFF)) { setLastMessage("Permission denied: cannot create staff."); return; }
-        if (isBlank(id) || isBlank(username)) { setLastMessage("Cannot create staff: ID or username is empty."); return; }
+        if (id == null || id.trim().isEmpty() || username == null || username.trim().isEmpty()) {
+            setLastMessage("Cannot create staff: ID or username is empty."); return;
+        }
         for (int i = 0; i < staffs.size(); i++) {
             if (staffs.get(i).getUsername().equalsIgnoreCase(username.trim())) {
                 setLastMessage("Cannot create staff: username already exists."); return;
             }
         }
-
-        Staff base = new Staff(id, name, username, password, role) {
-            @Override public boolean can(String action) { return false; }
-        };
         if (role.equalsIgnoreCase("ADMIN")) {
-            staffs.add(new Admin(base, salary));
+            staffs.add(new Admin(id, name, phone, username, password, salary));
             setLastMessage("Admin created successfully.");
         } else if (role.equalsIgnoreCase("MANAGER")) {
-            staffs.add(new Manager(base, salary));
+            staffs.add(new Manager(id, name, phone, username, password, salary));
             setLastMessage("Manager created successfully.");
         } else {
             setLastMessage("Invalid role: use ADMIN or MANAGER.");
@@ -107,7 +102,7 @@ public class Stable {
                             int stallId, String sire, String dam, double weight, double height) {
         if (!requireStaffLogin()) return;
         if (!loggedInUser.can(CREATE_HORSE)) { setLastMessage("Permission denied: cannot add horses."); return; }
-        if (isBlank(name)) { setLastMessage("Cannot create horse: name is required."); return; }
+        if (name == null || name.trim().isEmpty()) { setLastMessage("Cannot create horse: name is required."); return; }
         for (int i = 0; i < horses.size(); i++) {
             if (horses.get(i).getStallId() == stallId && stallId != 0) {
                 setLastMessage("Cannot create horse: stall " + stallId + " is already occupied."); return;
@@ -131,7 +126,7 @@ public class Stable {
                                String password, double balance, int horseId) {
         if (!requireStaffLogin()) return;
         if (!loggedInUser.can(CREATE_CUSTOMER)) { setLastMessage("Permission denied: cannot register customers."); return; }
-        if (isBlank(customerId) || isBlank(phone)) { setLastMessage("Cannot create customer: ID or phone is empty."); return; }
+        if (customerId == null || customerId.trim().isEmpty()) { setLastMessage("Cannot create customer: ID is empty."); return; }
         for (int i = 0; i < customers.size(); i++) {
             if (customers.get(i).getCustomerId().equalsIgnoreCase(customerId.trim())) {
                 setLastMessage("Cannot create customer: ID already exists."); return;
@@ -151,10 +146,7 @@ public class Stable {
         for (int i = 0; i < staffs.size(); i++) {
             if (staffs.get(i) instanceof Staff) {
                 Staff s = (Staff) staffs.get(i);
-                if (filter.test(s)) {
-                    System.out.println("  " + s);
-                    found = true;
-                }
+                if (filter.test(s)) { System.out.println("  " + s); found = true; }
             }
         }
         if (!found) System.out.println("  No staff matched.");
@@ -171,15 +163,15 @@ public class Stable {
     }
 
     public void printActiveStaffLambda() {
-        System.out.println("\n Active staff:");
+        System.out.println("\n[Lambda] Active staff:");
         filterStaff(s -> s.isActive());
     }
 
-
     public void printStaffByRole(String role) {
-        System.out.println("\n Staff with role '" + role + "':");
+        System.out.println("\n[Lambda] Staff with role '" + role + "':");
         filterStaff(s -> s.getRole().equalsIgnoreCase(role));
     }
+
 
     public void printStaff() {
         System.out.println("\n--- Staff (" + staffs.size() + ") ---");
@@ -203,8 +195,6 @@ public class Stable {
         }
         return null;
     }
-
-    public boolean isBlank(String str) { return str == null || str.trim().isEmpty(); }
 
     @Override
     public String toString() {

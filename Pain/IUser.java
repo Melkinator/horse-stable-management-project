@@ -3,9 +3,9 @@ package Pain;
 public interface IUser {
     String getId();
     String getUsername();
-    String getPassword();
+    boolean isActive();
+    boolean checkPassword(String input);
     String getName();
     String getRole();
-    boolean isActive();
-    boolean can(String action);
+    public abstract boolean can(String action);
 }

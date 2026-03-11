@@ -1,4 +1,5 @@
 package Pain;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -31,13 +32,14 @@ public class Main {
                 choice = sc.nextInt(); sc.nextLine();
                 switch (choice) {
                     case 1: {
-                        System.out.print("Staff ID: ");            String id   = sc.nextLine();
-                        System.out.print("Full Name: ");           String name = sc.nextLine();
-                        System.out.print("Role (ADMIN/MANAGER): "); String role = sc.nextLine();
-                        System.out.print("Username: ");            String user = sc.nextLine();
-                        System.out.print("Password: ");            String pass = sc.nextLine();
-                        System.out.print("Salary: ");              float sal   = sc.nextFloat(); sc.nextLine();
-                        stable.createStaff(id, name, role, user, pass, sal);
+                        System.out.print("Staff ID: ");            String id    = sc.nextLine();
+                        System.out.print("Full Name: ");           String name  = sc.nextLine();
+                        System.out.print("Phone: ");               String phone = sc.nextLine();
+                        System.out.print("Role (ADMIN/MANAGER): "); String role  = sc.nextLine();
+                        System.out.print("Username: ");            String user  = sc.nextLine();
+                        System.out.print("Password: ");            String pass  = sc.nextLine();
+                        System.out.print("Salary: ");              float sal    = sc.nextFloat(); sc.nextLine();
+                        stable.createStaff(id, name, phone, role, user, pass, sal);
                         System.out.println(stable.getLastMessage()); break;
                     }
                     case 2: {
@@ -106,7 +108,6 @@ public class Main {
         System.out.println("5)  List Staff");
         System.out.println("6)  List Horses");
         System.out.println("7)  List Customers");
-        System.out.println("--- Week 9: Abstraction ---");
         System.out.println("8)  Active Staff  [anonymous inner class]");
         System.out.println("9)  Active Staff  [lambda]");
         System.out.println("10) Filter Staff by Role [lambda]");

@@ -4,15 +4,16 @@ public class Manager extends Staff {
 
     private float salary;
 
-    public Manager(Staff s, float salary) {
-        super(s.getId(), s.getName(), s.getUsername(), s.getPassword(), "MANAGER");
+    public Manager(String id, String name, String phone,
+                   String username, String password, float salary) {
+        super(id, name, phone, username, password, "MANAGER");
         setSalary(salary);
     }
 
     public float getSalary() { return salary; }
 
     public void setSalary(float salary) {
-        if (salary < 500) System.out.println("Warning: Manager salary should be at least 500.");
+        if (salary < 500) System.out.println("error: need more salary");
         else this.salary = salary;
     }
 
@@ -26,14 +27,14 @@ public class Manager extends Staff {
 
     @Override
     public boolean equals(Object obj) {
-        if (!super.equals(obj)) return false;
-        if (!(obj instanceof Manager)) return false;
         Manager other = (Manager) obj;
-        return Float.floatToIntBits(this.salary) == Float.floatToIntBits(other.salary);
+        if (!super.equals(obj)) return false;
+        if (Float.floatToIntBits(salary) != Float.floatToIntBits(other.salary)) return false;
+        return true;
     }
 
     @Override
     public String toString() {
-        return super.toString().replace("]", "") + ", salary=" + salary + "]";
+        return super.toString() + "Manager [salary=" + salary + "]";
     }
 }
