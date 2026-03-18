@@ -108,9 +108,9 @@ public class Main {
         System.out.println("5)  List Staff");
         System.out.println("6)  List Horses");
         System.out.println("7)  List Customers");
-        System.out.println("8)  Active Staff  [anonymous inner class]");
-        System.out.println("9)  Active Staff  [lambda]");
-        System.out.println("10) Filter Staff by Role [lambda]");
+        System.out.println("8)  Active Staff");
+        System.out.println("9)  Active Staff");
+        System.out.println("10) Filter Staff by Role");
         System.out.println("11) Logout");
         System.out.println("0)  Exit");
     }
