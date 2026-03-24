@@ -112,9 +112,19 @@ public class Main {
 
     private static void printStaffMenu(Stable stable) {
         IUser u = stable.getLoggedInUser();
-        System.out.println("\n=== HORSE STABLE SYSTEM (Logged in: " + u.getName() + " | " + u.getRole() + ") ===");
+         System.out.println("\n=== HORSE STABLE SYSTEM (Logged in: " + u.getName() + " | " + u.getRole() + ") ===");
         System.out.println("1)  Create Staff");
         System.out.println("2)  Add Horse");
         System.out.println("3)  Register Customer");
+        System.out.println("4)  Set Horse Availability");
+        System.out.println("5)  List Staff");
+        System.out.println("6)  List Horses");
+        System.out.println("7)  List Customers");
+        System.out.println("--- Week 9: Abstraction ---");
+        System.out.println("8)  Active Staff  [anonymous inner class]");
+        System.out.println("9)  Active Staff  [lambda]");
+        System.out.println("10) Filter Staff by Role [lambda]");
+        System.out.println("11) Logout");
+        System.out.println("0)  Exit");
     }
 }
