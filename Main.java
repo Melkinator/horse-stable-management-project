@@ -16,17 +16,22 @@ public class Main {
             try {
                 if (!stable.isLoggedIn()) {
                     printMainMenu();
-                    System.out.print("Choose: ");
-                    choice = sc.nextInt(); sc.nextLine();
-                    switch (choice) {
-                        case 1: {
-                            System.out.print("Username: "); String u = sc.nextLine();
-                            System.out.print("Password: "); String p = sc.nextLine();
-                            stable.login(u, p); System.out.println(stable.getLastMessage()); break;
+                    try {
+                        System.out.print("Choose: ");
+                        choice = Integer.parseInt(sc.nextLine());
+                        switch (choice) {
+                            case 1: {
+                                System.out.print("Username: "); String u = sc.nextLine();
+                                System.out.print("Password: "); String p = sc.nextLine();
+                                stable.login(u, p); System.out.println(stable.getLastMessage()); break;
+                            }
+                            case 2: { stable.printHorses(); break; }
+                            case 0: { System.out.println("Goodbye!"); break; }
+                            default: System.out.println("Invalid choice.");
                         }
-                        case 2: { stable.printHorses(); break; }
-                        case 0: { System.out.println("Goodbye!"); break; }
-                        default: System.out.println("Invalid choice.");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter a valid number instead.");
+                        choice = -1;
                     }
                 } else {
                     printStaffMenu(stable);
