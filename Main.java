@@ -88,7 +88,7 @@ public class Main {
                             System.out.println(stable.getLastMessage()); break;
                         }
                         case 3: {
-                            String cId = String.valueOf(stable.getCustomerCount() + 1);
+                            String cId = String.valueOf(stable.getCustomerCount() + 1); 
                             System.out.print("Full Name: ");         String cName = sc.nextLine();
                             System.out.print("Phone: ");             String phone = sc.nextLine();
                             String pass=null;
@@ -105,7 +105,7 @@ public class Main {
                             System.out.println(stable.getLastMessage()); break;
                         }
                         case 4: {
-                            System.out.print("Booking ID: "); String bId = sc.nextLine();
+                            String bId = String.valueOf(stable.getBookingCount() + 1);
                             System.out.print("Customer ID: "); String cId = sc.nextLine();
                             int hId = getSafeInt(sc, "Horse ID: ");
                             int days = getSafeInt(sc, "Duration (Days): ");

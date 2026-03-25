@@ -38,6 +38,7 @@ public class Stable {
     public int getStaffCount()     { return staffs.size(); }
     public int getHorseCount()     { return horses.size(); }
     public int getCustomerCount()  { return customers.size(); }
+    public int getBookingCount()   { return bookings.size(); }
 
     public void setName(String name) {
         if (name == null || name.trim().isEmpty()) this.name = "No Name";
