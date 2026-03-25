@@ -36,7 +36,7 @@ public class Main {
                 } else {
                     printStaffMenu(stable);
                     System.out.print("Choose: ");
-                    choice = sc.nextInt(); sc.nextLine();
+                    choice = Integer.parseInt(sc.nextLine());
                     switch (choice) {
                         case 1: {
                             System.out.print("Staff ID: ");            String id    = sc.nextLine();
@@ -159,15 +159,17 @@ public class Main {
         System.out.println("1)  Create Staff");
         System.out.println("2)  Add Horse");
         System.out.println("3)  Register Customer");
-        System.out.println("4)  Set Horse Availability");
-        System.out.println("5)  List Staff");
-        System.out.println("6)  List Horses");
-        System.out.println("7)  List Customers");
+        System.out.println("4)  Add Booking");
+        System.out.println("5)  Set Horse Availability");
+        System.out.println("6)  List Staff");
+        System.out.println("7)  List Horses");
+        System.out.println("8)  List Customers");
+        System.out.println("9) View Bookings");
         System.out.println("--- Week 9: Abstraction ---");
-        System.out.println("8)  Active Staff  [anonymous inner class]");
-        System.out.println("9)  Active Staff  [lambda]");
-        System.out.println("10) Filter Staff by Role [lambda]");
-        System.out.println("11) Logout");
+        System.out.println("10)  Active Staff  [anonymous inner class]");
+        System.out.println("11) Active Staff  [lambda]");
+        System.out.println("12) Filter Staff by Role [lambda]");
+        System.out.println("13) Logout");
         System.out.println("0)  Exit");
     }
 }
