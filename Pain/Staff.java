@@ -79,7 +79,7 @@ public abstract class Staff implements IUser {
 
     @Override
     public String toString() {
-        return "S{" +
+        return "{id='" + id + "'" +
                ", name='" + name + "'" +
                ", phone='" + phone + "'" +
                ", username='" + username + "'" +
