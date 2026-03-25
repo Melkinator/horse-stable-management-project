@@ -35,6 +35,9 @@ public class Stable {
     public boolean isLoggedIn()    { return loggedInUser != null; }
     public IUser getLoggedInUser() { return loggedInUser; }
     public String getLastMessage() { return lastMessage; }
+    public int getStaffCount()     { return staffs.size(); }
+    public int getHorseCount()     { return horses.size(); }
+    public int getCustomerCount()  { return customers.size(); }
 
     public void setName(String name) {
         if (name == null || name.trim().isEmpty()) this.name = "No Name";

@@ -47,7 +47,7 @@ public class Main {
                     choice = Integer.parseInt(sc.nextLine());
                     switch (choice) {
                         case 1: {
-                            System.out.print("Staff ID: ");            String id    = sc.nextLine();
+                            String id = String.valueOf(stable.getStaffCount() + 1);
                             System.out.print("Full Name: ");           String name  = sc.nextLine();
                             System.out.print("Phone: ");               String phone = sc.nextLine();
                             System.out.print("Role (ADMIN/MANAGER): "); String role  = sc.nextLine();
@@ -88,7 +88,7 @@ public class Main {
                             System.out.println(stable.getLastMessage()); break;
                         }
                         case 3: {
-                            System.out.print("Customer ID: ");       String cId   = sc.nextLine();
+                            String cId = String.valueOf(stable.getCustomerCount() + 1);
                             System.out.print("Full Name: ");         String cName = sc.nextLine();
                             System.out.print("Phone: ");             String phone = sc.nextLine();
                             String pass=null;
