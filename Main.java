@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.io.Console;
 
 import Pain.Horse;
 import Pain.Stable;
@@ -10,6 +11,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Stable stable = new Stable("John and Melk's Stable");
         System.out.println(stable.getLastMessage());
+        Console console = System.console();
 
         int choice=-1;
         do {
@@ -22,8 +24,14 @@ public class Main {
                         switch (choice) {
                             case 1: {
                                 System.out.print("Username: "); String u = sc.nextLine();
-                                System.out.print("Password: "); String p = sc.nextLine();
-                                stable.login(u, p); System.out.println(stable.getLastMessage()); break;
+                                if (console!=null) {
+                                    char[] passwordArray = console.readPassword("Password: ");
+                                    String p = new String(passwordArray);
+                                    stable.login(u, p); System.out.println(stable.getLastMessage()); break;
+                                } else {
+                                    System.out.println("Could not find console. Exiting..");
+                                    System.exit(1);
+                                }
                             }
                             case 2: { stable.printHorses(); break; }
                             case 0: { System.out.println("Goodbye!"); break; }
@@ -44,7 +52,14 @@ public class Main {
                             System.out.print("Phone: ");               String phone = sc.nextLine();
                             System.out.print("Role (ADMIN/MANAGER): "); String role  = sc.nextLine();
                             System.out.print("Username: ");            String user  = sc.nextLine();
-                            System.out.print("Password: ");            String pass  = sc.nextLine();
+                            String pass=null;
+                            if (console!=null) {
+                                char[] passwordArray = console.readPassword("Password: ");
+                                pass = new String(passwordArray);
+                            } else {
+                                System.out.println("Could not find console. Exiting..");
+                                System.exit(1);
+                            }
                             float sal = (float) getSafeDouble(sc, "Salary: ");
                             stable.createStaff(id, name, phone, role, user, pass, sal);
                             System.out.println(stable.getLastMessage()); break;
@@ -76,7 +91,14 @@ public class Main {
                             System.out.print("Customer ID: ");       String cId   = sc.nextLine();
                             System.out.print("Full Name: ");         String cName = sc.nextLine();
                             System.out.print("Phone: ");             String phone = sc.nextLine();
-                            System.out.print("Password: ");          String pass  = sc.nextLine();
+                            String pass=null;
+                            if (console!=null) {
+                                char[] passwordArray = console.readPassword("Password: ");
+                                pass = new String(passwordArray);
+                            } else {
+                                System.out.println("Could not find console. Exiting..");
+                                System.exit(1);
+                            }
                             double bal   = getSafeDouble(sc, "Balance: ");
                             int hId      = getSafeInt(sc, "Horse ID (0=none): ");
                             stable.createCustomer(cId, cName, phone, pass, bal, hId);
